@@ -1,108 +1,40 @@
+'Homes For Good - Michael Wiltshire'
 Sub ExportPDF()
 
+'Worksheet definitions'
 Dim detailsSheet As Worksheet
 Dim reportSheet As Worksheet
-
 Set reportSheet = ActiveWorkbook.Sheets("Sheet1")
 Set detailsSheet = ActiveWorkbook.Sheets("AssessmentData")
 
+'Loop through rows'
 For i = 1 To 5
-
-RPSD = detailsSheet.Cells(i, 1)
-RPED = detailsSheet.Cells(i, 2)
-SAID = detailsSheet.Cells(i, 3)
-MAID = detailsSheet.Cells(i, 4)
-EN = detailsSheet.Cells(i, 5)
-ES = detailsSheet.Cells(i, 6)
-MN = detailsSheet.Cells(i, 7)
-SAC = detailsSheet.Cells(i, 8)
-MACD = detailsSheet.Cells(i, 9)
-AN = detailsSheet.Cells(i, 10)
-ANSD = detailsSheet.Cells(i, 11)
-CS1 = detailsSheet.Cells(i, 12)
-CS2 = detailsSheet.Cells(i, 13)
-CS3 = detailsSheet.Cells(i, 14)
-IFV = detailsSheet.Cells(i, 15)
-IHWIN = detailsSheet.Cells(i, 16)
-WASTIDW = detailsSheet.Cells(i, 17)
-HCII = detailsSheet.Cells(i, 18)
-CM1 = detailsSheet.Cells(i, 19)
-CM2 = detailsSheet.Cells(i, 20)
-CM3 = detailsSheet.Cells(i, 21)
-V = detailsSheet.Cells(i, 22)
-E = detailsSheet.Cells(i, 23)
-WASTNDW = detailsSheet.Cells(i, 24)
-HCNI = detailsSheet.Cells(i, 25)
-S = detailsSheet.Cells(i, 26)
-
-reportSheet.Cells(3, 2).Value = RPSD
-reportSheet.Cells(4, 2).Value = RPED
-reportSheet.Cells(5, 2).Value = SAID
-reportSheet.Cells(6, 2).Value = MAID
-reportSheet.Cells(7, 2).Value = EN
-reportSheet.Cells(8, 2).Value = ES
-reportSheet.Cells(9, 2).Value = MN
-reportSheet.Cells(10, 2).Value = SAC
-reportSheet.Cells(11, 2).Value = MACD
-reportSheet.Cells(12, 2).Value = AN
-reportSheet.Cells(13, 2).Value = ANSD
-reportSheet.Cells(14, 2).Value = CS1
-reportSheet.Cells(15, 2).Value = CS2
-reportSheet.Cells(16, 2).Value = CS3
-reportSheet.Cells(17, 2).Value = IFV
-reportSheet.Cells(18, 2).Value = IHWIN
-reportSheet.Cells(19, 2).Value = WASTIDW
-reportSheet.Cells(20, 2).Value = HCII
-reportSheet.Cells(21, 2).Value = CM1
-reportSheet.Cells(22, 2).Value = CM2
-reportSheet.Cells(23, 2).Value = CM3
-reportSheet.Cells(24, 2).Value = V
-reportSheet.Cells(25, 2).Value = E
-reportSheet.Cells(26, 2).Value = WASTNDW
-reportSheet.Cells(27, 2).Value = HCNI
-reportSheet.Cells(28, 2).Value = S
-
-
-
-
-
-ActiveSheet.ExportAsFixedFormat Type:=x1TypePDF, Filename:= _
-    "C:\Users\mwiltshire\OneDrive - Homes for Good\Desktop\Employee_performance\" _
-     & EN & "(" & Format(RPSD, "mm.dd.yy") & "-" & Format(RPSD, "mm.dd.yy") & ")", _
-     Quality:=x1QualityStandard, _
-    IncludeDocProperties:=True, IgnorePrintAreas:=False, _
-    OpenAfterPublish:=False
+    'Holding onto name and dates'
+    EN = detailsSheet.Cells(i, 5)
+    RPSD = detailsSheet.Cells(i, 1)
+    RPED = detailsSheet.Cells(i, 2)
     
-RPSD = detailsSheet.Cells(i, 1)
-
-reportSheet.Cells(3, 2).ClearContents
-reportSheet.Cells(4, 2).ClearContents
-reportSheet.Cells(5, 2).ClearContents
-reportSheet.Cells(6, 2).ClearContents
-reportSheet.Cells(7, 2).ClearContents
-reportSheet.Cells(8, 2).ClearContents
-reportSheet.Cells(9, 2).ClearContents
-reportSheet.Cells(10, 2).ClearContents
-reportSheet.Cells(11, 2).ClearContents
-reportSheet.Cells(12, 2).ClearContents
-reportSheet.Cells(13, 2).ClearContents
-reportSheet.Cells(14, 2).ClearContents
-reportSheet.Cells(15, 2).ClearContents
-reportSheet.Cells(16, 2).ClearContents
-reportSheet.Cells(17, 2).ClearContents
-reportSheet.Cells(18, 2).ClearContents
-reportSheet.Cells(19, 2).ClearContents
-reportSheet.Cells(20, 2).ClearContents
-reportSheet.Cells(21, 2).ClearContents
-reportSheet.Cells(22, 2).ClearContents
-reportSheet.Cells(23, 2).ClearContents
-reportSheet.Cells(24, 2).ClearContents
-reportSheet.Cells(25, 2).ClearContents
-reportSheet.Cells(26, 2).ClearContents
-reportSheet.Cells(27, 2).ClearContents
-reportSheet.Cells(28, 2).ClearContents
+    'Loop through cols'
+    For j = 1 To 26
+        'Copy from detailsheet and _
+        paste value to reportsheet'
+        curr = detailsSheet.Cells(i, j)
+        reportSheet.Cells(j + 2, 2).Value = curr
+    Next j
+    
+    'Save file to PDF'
+    ActiveSheet.ExportAsFixedFormat Type:=x1TypePDF, Filename:= _
+        "C:\Users\mwiltshire\OneDrive - Homes for Good\Desktop\tester\" _
+         & EN & "(" & Format(RPSD, "mm.dd.yy") & "-" & Format(RPSD, "mm.dd.yy") & ")", _
+         Quality:=x1QualityStandard, _
+        IncludeDocProperties:=True, IgnorePrintAreas:=False, _
+        OpenAfterPublish:=False
+        
+    'Clear out the values of reportsheet'
+    For k = 2 To 28
+        reportSheet.Cells(j + 2, 2).ClearContents
+    Next k
     
 Next i
 
 End Sub
-
