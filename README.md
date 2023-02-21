@@ -1,4 +1,4 @@
-# Homes_For_Good_Script
+# Excel-to-PDF Automation Tool
 
 This is a Visual Basic script that converts Excel profiles to PDF with appropriate fields. The script was created as part of a project for Homes for Good, where it was used to automate the process of generating PDF reports from Excel data.
 
